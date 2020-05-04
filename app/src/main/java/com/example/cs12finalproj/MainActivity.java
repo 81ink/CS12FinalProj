@@ -23,9 +23,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private int roundCount;
 
     /** Points of player 1 */
-    private int player1Points;
+    private int player1Pts;
     /** Points of player 2 */
-    private int player2Points;
+    private int player2Pts;
 
     private TextView player1;
     private TextView player2;
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
 
-        Button buttonReset = findViewById(R.id.game_restart);
+        Button buttonReset = findViewById(R.id.button_reset);
         buttonReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -125,14 +125,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void player1Wins() {
-        player1Points++;
+        player1Pts++;
         Toast.makeText(this, "Player 1 wins!", Toast.LENGTH_SHORT).show();
         updatePointsText();
         resetBoard();
     }
 
     private void player2Wins() {
-        player2Points++;
+        player2Pts++;
         Toast.makeText(this, "Player 2 wins!", Toast.LENGTH_SHORT).show();
         updatePointsText();
         resetBoard();
@@ -144,8 +144,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void updatePointsText() {
-        player1.setText("Player 1: " + player1Points);
-        player2.setText("Player 2: " + player2Points);
+        player1.setText("Player 1: " + player1Pts);
+        player2.setText("Player 2: " + player2Pts);
     }
 
     private void resetBoard() {
@@ -160,8 +160,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void resetGame() {
-        player1Points = 0;
-        player2Points = 0;
+        player1Pts = 0;
+        player2Pts = 0;
         updatePointsText();
         resetBoard();
     }
@@ -171,8 +171,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onSaveInstanceState(outState);
 
         outState.putInt("roundCount", roundCount);
-        outState.putInt("player1Points", player1Points);
-        outState.putInt("player2Points", player2Points);
+        outState.putInt("player1Points", player1Pts);
+        outState.putInt("player2Points", player2Pts);
         outState.putBoolean("player1Turn", player1Turn);
     }
 
@@ -181,8 +181,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onRestoreInstanceState(savedInstanceState);
 
         roundCount = savedInstanceState.getInt("roundCount");
-        player1Points = savedInstanceState.getInt("player1Points");
-        player2Points = savedInstanceState.getInt("player2Points");
+        player1Pts = savedInstanceState.getInt("player1Points");
+        player2Pts = savedInstanceState.getInt("player2Points");
         player1Turn = savedInstanceState.getBoolean("player1Turn");
     }
 }
