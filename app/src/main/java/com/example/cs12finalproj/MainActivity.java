@@ -1,49 +1,42 @@
 package com.example.cs12finalproj;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-/*
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
- */
-
-/* import javax.swing.*;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
-
- */
+import androidx.appcompat.app.AppCompatActivity;
 
 
+/** Logic was made with the assistance of this https://www.youtube.com/watch?v=-8ZIGRe7chM tutorial
+ * and the proceeding videos, as well as https://www.youtube.com/watch?v=apDL78MFR3o&t=99s */
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+    /** 2d array with 3x3 buttons */
     private Button[][] buttons = new Button[3][3];
 
+    /** Dummy variable for player turn */
     private boolean player1Turn = true;
-
+    
     private int roundCount;
 
+    /** Points of player 1 */
     private int player1Points;
+    /** Points of player 2 */
     private int player2Points;
 
-    private TextView textViewPlayer1;
-    private TextView textViewPlayer2;
+    private TextView player1;
+    private TextView player2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        textViewPlayer1 = findViewById(R.id.text_view_p1);
-        textViewPlayer2 = findViewById(R.id.text_view_p2);
+        player1 = findViewById(R.id.text_view_p1);
+        player2 = findViewById(R.id.text_view_p2);
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
@@ -54,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
 
-        Button buttonReset = findViewById(R.id.button_reset);
+        Button buttonReset = findViewById(R.id.game_restart);
         buttonReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         roundCount++;
 
-        if (checkForWin()) {
+        if (winCheck()) {
             if (player1Turn) {
                 player1Wins();
             } else {
@@ -91,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    private boolean checkForWin() {
+    private boolean winCheck() {
         String[][] field = new String[3][3];
 
         for (int i = 0; i < 3; i++) {
@@ -151,8 +144,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void updatePointsText() {
-        textViewPlayer1.setText("Player 1: " + player1Points);
-        textViewPlayer2.setText("Player 2: " + player2Points);
+        player1.setText("Player 1: " + player1Points);
+        player2.setText("Player 2: " + player2Points);
     }
 
     private void resetBoard() {
